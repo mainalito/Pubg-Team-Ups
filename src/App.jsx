@@ -117,14 +117,14 @@ export default function App() {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
                                 <div className="flex flex-col items-center justify-center bg-blue-100 p-3 rounded">
                                     <span className="font-medium text-blue-800">Team {index * 2 + 1}</span>
-                                    <span className="text-sm text-gray-600">
+                                    <span className="text-lg text-gray-600">
                     {Array.isArray(match.team1) ? match.team1.join(', ') : 'Unavailable'}
                 </span>
                                 </div>
                                 {Array.isArray(match.team2) && match.team2[0] !== "No Opponent" ? (
                                     <div className="flex flex-col items-center justify-center bg-green-100 p-3 rounded">
                                         <span className="font-medium text-green-800">Team {index * 2 + 2}</span>
-                                        <span className="text-sm text-gray-600">{match.team2.join(', ')}</span>
+                                        <span className="text-lg text-gray-600">{match.team2.join(', ')}</span>
                                     </div>
                                 ) : (
                                     <div className="flex flex-col items-center justify-center bg-red-100 p-3 rounded">
