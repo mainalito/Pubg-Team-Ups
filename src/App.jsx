@@ -111,35 +111,30 @@ export default function App() {
                 {/* Team Pairs Display */}
 
                 <div className="p-6">
-                    {teamPairs.length > 0 && (
-                        <div>
-                            <h2 className="text-2xl font-bold text-center mb-6">Team Matchups</h2>
-                            <div className="space-y-4">
-                                {teamPairs.map((match, index) => (
-                                    <div key={index} className="bg-white shadow-lg rounded-lg p-4">
-                                        <h3 className="text-lg font-semibold text-blue-600">Match {index + 1}</h3>
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-                                            <div className="flex flex-col items-center justify-center bg-blue-100 p-3 rounded">
-                                                <span className="font-medium text-blue-800">Team {index * 2 + 1}</span>
-                                                <span className="text-sm text-gray-600">{match.team1.join(', ')}</span>
-                                            </div>
-                                            {match.team2 && match.team2[0] !== "No Opponent" ? (
-                                                <div className="flex flex-col items-center justify-center bg-green-100 p-3 rounded">
-                                                    <span className="font-medium text-green-800">Team {index * 2 + 2}</span>
-                                                    <span className="text-sm text-gray-600">{match.team2.join(', ')}</span>
-                                                </div>
-                                            ) : (
-                                                <div className="flex flex-col items-center justify-center bg-red-100 p-3 rounded">
-                                                    <span className="text-sm text-red-500">No Opponent</span>
-                                                </div>
-                                            )}
-                                        </div>
+                    {teamPairs.map((match, index) => (
+                        <div key={index} className="bg-white shadow-lg rounded-lg p-4">
+                            <h3 className="text-lg font-semibold text-blue-600">Match {index + 1}</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+                                <div className="flex flex-col items-center justify-center bg-blue-100 p-3 rounded">
+                                    <span className="font-medium text-blue-800">Team {index * 2 + 1}</span>
+                                    <span className="text-sm text-gray-600">
+                    {Array.isArray(match.team1) ? match.team1.join(', ') : 'Unavailable'}
+                </span>
+                                </div>
+                                {Array.isArray(match.team2) && match.team2[0] !== "No Opponent" ? (
+                                    <div className="flex flex-col items-center justify-center bg-green-100 p-3 rounded">
+                                        <span className="font-medium text-green-800">Team {index * 2 + 2}</span>
+                                        <span className="text-sm text-gray-600">{match.team2.join(', ')}</span>
                                     </div>
-                                ))}
-
+                                ) : (
+                                    <div className="flex flex-col items-center justify-center bg-red-100 p-3 rounded">
+                                        <span className="text-sm text-red-500">No Opponent</span>
+                                    </div>
+                                )}
                             </div>
                         </div>
-                    )}
+                    ))}
+
                 </div>
 
             </div>
