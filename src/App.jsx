@@ -38,14 +38,22 @@ export default function App() {
 
         let pairs = [];
         for (let i = 0; i < teams.length; i += 2) {
-            if (teams[i + 1]) {
-                pairs.push(`Team ${i + 1}: ${teams[i].join(', ')} vs Team ${i + 2}: ${teams[i + 1].join(', ')}`);
-            } else {
-                pairs.push(`Team ${i + 1}: ${teams[i].join(', ')} (no opponent)`);
-            }
+            const match = {
+                team1: teams[i],
+                team2: teams[i + 1] || ["No Opponent"]
+            };
+            pairs.push(match);
         }
-
+        console.log(pairs)
         setTeamPairs(pairs);
+    };
+    const handleReset = () => {
+        setUsernames(['']); // Reset usernames to initial state with one empty string
+        setTeamPairs([]); // Clear all team pairings
+
+        // Optionally, also clear data from local storage
+        localStorage.removeItem('usernames');
+        localStorage.removeItem('teamPairs');
     };
     return (
         <div className="flex justify-center items-center bg-gray-100 min-h-screen p-4">
@@ -84,33 +92,52 @@ export default function App() {
 
                     {/* Action Buttons */}
                     <div className="flex justify-between items-center mt-4">
-                        <div className="flex justify-between items-center mt-4">
-                            <button onClick={handleAddUsername}
-                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline">
-                                Add User
-                            </button>
-                            <button onClick={createTeamPairs}
-                                    className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline ${usernames.length < 4 ? 'opacity-50 cursor-not-allowed' : ''}`}>
-                                Create Team Pairs
-                            </button>
-                        </div>
+                        <button onClick={handleAddUsername}
+                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline">
+                            Add User
+                        </button>
+                        <button onClick={createTeamPairs}
+                                className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline ${usernames.length < 4 ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                            Create Team Pairs
+                        </button>
+                        <button onClick={handleReset}
+                                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline">
+                            Reset
+                        </button>
                     </div>
 
                 </div>
 
                 {/* Team Pairs Display */}
-                {teamPairs.length > 0 && (
-                    <div className="p-6 border-t">
-                        <div className="font-bold text-xl mb-4">Team Pairs</div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {teamPairs.map((pair, index) => (
-                                <div key={index} className="bg-gray-200 p-3 rounded-lg">
-                                    <p className="text-gray-700 text-lg">{pair}</p>
-                                </div>
-                            ))}
+
+                <div className="p-6">
+                    {teamPairs.length > 0 && (
+                        <div>
+                            <h2 className="text-2xl font-bold text-center mb-6">Team Matchups</h2>
+                            <div className="space-y-4">
+                                {teamPairs.map((match, index) => (
+                                    <div key={index} className="bg-white shadow-lg rounded-lg p-4">
+                                        <h3 className="text-lg font-semibold text-blue-600">Match {index + 1}</h3>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+                                            <div
+                                                className="flex flex-col items-center justify-center bg-blue-100 p-3 rounded">
+                                                <span className="text-sm text-blue-800">Team {index * 2 + 1}</span>
+                                                <span className="text-lg text-gray-600">{match.team1.join(', ')}</span>
+                                            </div>
+                                            <div
+                                                className={`flex flex-col items-center justify-center ${match.team2[0] !== "No Opponent" ? "bg-green-100" : "bg-red-100"} p-3 rounded`}>
+                                                <span
+                                                    className={`text-sm ${match.team2[0] !== "No Opponent" ? "text-green-800" : "text-red-500"}`}>Team {index * 2 + 2}</span>
+                                                <span className="text-lg text-gray-600">{match.team2.join(', ')}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
+                </div>
+
             </div>
         </div>
 
