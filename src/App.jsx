@@ -119,20 +119,24 @@ export default function App() {
                                     <div key={index} className="bg-white shadow-lg rounded-lg p-4">
                                         <h3 className="text-lg font-semibold text-blue-600">Match {index + 1}</h3>
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-                                            <div
-                                                className="flex flex-col items-center justify-center bg-blue-100 p-3 rounded">
-                                                <span className="text-sm text-blue-800">Team {index * 2 + 1}</span>
-                                                <span className="text-lg text-gray-600">{match.team1.join(', ')}</span>
+                                            <div className="flex flex-col items-center justify-center bg-blue-100 p-3 rounded">
+                                                <span className="font-medium text-blue-800">Team {index * 2 + 1}</span>
+                                                <span className="text-sm text-gray-600">{match.team1.join(', ')}</span>
                                             </div>
-                                            <div
-                                                className={`flex flex-col items-center justify-center ${match.team2[0] !== "No Opponent" ? "bg-green-100" : "bg-red-100"} p-3 rounded`}>
-                                                <span
-                                                    className={`text-sm ${match.team2[0] !== "No Opponent" ? "text-green-800" : "text-red-500"}`}>Team {index * 2 + 2}</span>
-                                                <span className="text-lg text-gray-600">{match.team2.join(', ')}</span>
-                                            </div>
+                                            {match.team2 && match.team2[0] !== "No Opponent" ? (
+                                                <div className="flex flex-col items-center justify-center bg-green-100 p-3 rounded">
+                                                    <span className="font-medium text-green-800">Team {index * 2 + 2}</span>
+                                                    <span className="text-sm text-gray-600">{match.team2.join(', ')}</span>
+                                                </div>
+                                            ) : (
+                                                <div className="flex flex-col items-center justify-center bg-red-100 p-3 rounded">
+                                                    <span className="text-sm text-red-500">No Opponent</span>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 ))}
+
                             </div>
                         </div>
                     )}
