@@ -56,8 +56,15 @@ export default function App() {
         localStorage.removeItem('teamPairs');
     };
     return (
-        <div className=" bg-cover bg-center flex justify-center items-center bg-gray-100 min-h-screen p-4" style={{ backgroundImage: `url('https://c4.wallpaperflare.com/wallpaper/576/289/155/pubg-playerunknowns-battlegrounds-2018-games-games-wallpaper-preview.jpg')` }}>
-
+        <div className="bg-cover bg-center flex justify-center items-center bg-gray-100 min-h-screen p-4" style={{
+            backgroundImage: `url('https://c4.wallpaperflare.com/wallpaper/576/289/155/pubg-playerunknowns-battlegrounds-2018-games-games-wallpaper-preview.jpg')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            '@media (max-width: 767px)': {
+                backgroundSize: 'contain',
+            },
+        }}>
             <div className="rounded-lg overflow-hidden shadow-2xl max-w-2xl w-full bg-[#231f20]  text-white">
                 <div className="p-6">
                     {/* Header */}
