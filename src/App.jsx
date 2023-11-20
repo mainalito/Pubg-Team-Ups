@@ -56,13 +56,14 @@ export default function App() {
         localStorage.removeItem('teamPairs');
     };
     return (
-        <div className="flex justify-center items-center bg-gray-100 min-h-screen p-4">
-            <div className="rounded-lg overflow-hidden shadow-xl max-w-2xl w-full bg-white">
+        <div className=" bg-cover bg-center flex justify-center items-center bg-gray-100 min-h-screen p-4" style={{ backgroundImage: `url('/src/assets/pubg.jpg')` }}>
+
+            <div className="rounded-lg overflow-hidden shadow-2xl max-w-2xl w-full bg-[#231f20]  text-white">
                 <div className="p-6">
                     {/* Header */}
-                    <div className="mb-4">
-                        <div className="font-bold text-2xl mb-2 text-gray-800">DEADLY CLAN</div>
-                        <p className="text-gray-600 text-base">
+                    <div className="mb-4 flex flex-col gap-y-2">
+                        <div className="font-bold text-3xl mb-2 text-white">DEADLY CLAN</div>
+                        <p className="text-gray-200 text-base">
                             Add PUBG usernames and create teams.
                         </p>
                     </div>
@@ -116,15 +117,16 @@ export default function App() {
                             <h3 className="text-lg font-semibold text-blue-600">Match {index + 1}</h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
                                 <div className="flex flex-col items-center justify-center bg-blue-100 p-3 rounded">
-                                    <span className="font-medium text-blue-800">Team {index * 2 + 1}</span>
-                                    <span className="text-lg text-gray-600">
+
+                                    <span className="font-medium text-blue-800">
                     {Array.isArray(match.team1) ? match.team1.join(', ') : 'Unavailable'}
                 </span>
                                 </div>
+
                                 {Array.isArray(match.team2) && match.team2[0] !== "No Opponent" ? (
                                     <div className="flex flex-col items-center justify-center bg-green-100 p-3 rounded">
-                                        <span className="font-medium text-green-800">Team {index * 2 + 2}</span>
-                                        <span className="text-lg text-gray-600">{match.team2.join(', ')}</span>
+                                        <span className="font-medium text-green-800">
+                                            {match.team2.join(', ')}</span>
                                     </div>
                                 ) : (
                                     <div className="flex flex-col items-center justify-center bg-red-100 p-3 rounded">
